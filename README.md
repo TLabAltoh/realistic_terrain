@@ -1,5 +1,10 @@
-# ValleyGenerator
-Plug-in for Blender to generate terrain procedurally
+# Realistic Terrain
+Add-on for Blender to simulate terrain using directx11 compute shader
 
-## ScreenShot
-![image](https://github.com/TLabAltoh/ValleyGenerator/assets/121733943/fbd8844a-90e7-40a6-a79a-752f6f2bc8d8)
+## Screenshot
+<src="Media/realistic-terrain-cap.gif"></src>
+
+## Requirements
+- Windows10
+- DirectX11
+- Blender using Python 3.10.* (ex. Blender 3.4)
