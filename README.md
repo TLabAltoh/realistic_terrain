@@ -15,7 +15,7 @@ Add-on for Blender to simulate terrain using directx11 compute shader
 <img src="media/git-download-zip.png" width="256"></img>
 - Launch Blender and select the Zip file downloaded by Install from Edit/Preference/Add-ons  
 <img src="media/install-to-blender.0.png" width="256"></img>
-- Enable "realistic-terrain  
+- Enable "realistic-terrain"  
 <img src="media/install-to-blender.1.png" width="256"></img>
 
 ## Reference
