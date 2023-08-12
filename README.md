@@ -2,7 +2,7 @@
 Add-on for Blender to simulate terrain using directx11 compute shader
 
 ## Screenshot
-<src="Media/realistic-terrain-cap.gif"></src>
+<img src="Media/realistic-terrain-cap.gif"></img>
 
 ## Requirements
 - Windows10
