@@ -11,13 +11,16 @@ Provide simple terrain material
 - Blender using Python 3.10.* (ex. Blender 3.4)
 	- Numpy
 
+## Note
+All versions 1.2 and later will be distributed with the release.
+If you have already installed version 1.1 or earlier, please deactivate and uninstall the already installed realistic terrain before installing version 1.2 or later.
+If you cannot uninstall version 1.1 or earlier, delete the folder directly. Add-ons for version 1.1 or earlier should be located in the following directory  
+``` C:\Users\{USER_NAME}\AppData\Roaming\Blender Foundation\Blender\3.4\scripts\addons\realistic-terrain-master ```
+
 ## Install
-- Download the Zip file of the repository  
-<img src="media/git-download-zip.png" width="256"></img>
+- Install 1.2 or later versions from release  
 - Launch Blender and select the Zip file downloaded by Install from Edit/Preference/Add-ons  
-<img src="media/install-to-blender.0.png" width="256"></img>
-- Enable "realistic-terrain"  
-<img src="media/install-to-blender.1.png" width="256"></img>
+- Enable "realistic_terrain"  
 
 ## Tutorial for terrain representation combined with A.N.T.Landscape
 1. Create an A.N.T. Landscape grid with a resolution of 1024x1024 (be sure to create the grid with NxN resolution)  

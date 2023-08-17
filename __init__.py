@@ -1,20 +1,15 @@
 import bpy
 import logging
-import os
-import sys
 
-addon_dirpath = os.path.dirname(__file__)
-sys.path += [addon_dirpath]
-
-import grid
-import erode
-import perlin
-import material
+from realistic_terrain import grid
+from realistic_terrain import erode
+from realistic_terrain import perlin
+from realistic_terrain import material
 
 bl_info = {
     "name": "realistic terrain",
     "author": "tlabaltoh",
-    "version": (1, 1),
+    "version": (1, 2),
     "blender": (3, 4, 0),
     "location": "View3D > Tools > Terrain",
     "description": "Simulation of random terrain generation and rain erosion",
