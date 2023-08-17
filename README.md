@@ -20,7 +20,9 @@ If you cannot uninstall version 1.1 or earlier, delete the folder directly. Add-
 ## Install
 - Install 1.2 or later versions from release  
 - Launch Blender and select the Zip file downloaded by Install from Edit/Preference/Add-ons  
-- Enable "realistic_terrain"  
+<img src="media/install-to-blender.0.png" width="256"></img>  
+- Enable "realistic terrain"  
+<img src="media/install-to-blender.1.png" width="256"></img>  
 
 ## Tutorial for terrain representation combined with A.N.T.Landscape
 1. Create an A.N.T. Landscape grid with a resolution of 1024x1024 (be sure to create the grid with NxN resolution)  
