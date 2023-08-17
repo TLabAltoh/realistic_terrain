@@ -9,7 +9,7 @@ from realistic_terrain import material
 bl_info = {
     "name": "realistic terrain",
     "author": "tlabaltoh",
-    "version": (1, 1),
+    "version": (1, 2),
     "blender": (3, 4, 0),
     "location": "View3D > Tools > Terrain",
     "description": "Simulation of random terrain generation and rain erosion",
