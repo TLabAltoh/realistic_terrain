@@ -2,13 +2,11 @@ import bpy
 import bmesh
 import math
 import numpy as np
+
 import os
-import sys
-
 addon_dirpath = os.path.dirname(__file__)
-sys.path += [addon_dirpath]
 
-import dx11_erosion
+from realistic_terrain import dx11_erosion
 
 #
 # Erode
