@@ -232,7 +232,9 @@ class CreateTerrainMaterial(bpy.types.Operator):
     name = obj.name
     m_name = "terrain-" + name
     
-    if m_name in obj.data.materials:
+    if m_name in bpy.data.materials:
+        obj.data.materials.append(bpy.data.materials[m_name])
+        obj.active_material_index = len(obj.data.materials) - 1
         return
     
     material = bpy.data.materials.new("terrain-" + name)
