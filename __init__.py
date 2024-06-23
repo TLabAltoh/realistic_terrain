@@ -9,7 +9,7 @@ from realistic_terrain import material
 bl_info = {
     "name": "realistic terrain",
     "author": "tlabaltoh",
-    "version": (1, 2),
+    "version": (1, 3),
     "blender": (3, 4, 0),
     "location": "View3D > Tools > Terrain",
     "description": "Simulation of random terrain generation and rain erosion",
@@ -28,9 +28,9 @@ class Terrain(bpy.types.Menu):
     bl_label = "Terrain"
     
     def draw(self, context):
-        self.layout.menu("Grid", icon="MESH_DATA")
-        self.layout.menu("Erode", icon="MESH_DATA")
-        self.layout.menu("Perlin", icon="MESH_DATA")
+        self.layout.menu("Grid")
+        self.layout.menu("Erode")
+        self.layout.menu("Perlin")
 
 #
 # Main thread

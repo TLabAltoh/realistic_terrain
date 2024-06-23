@@ -458,6 +458,9 @@ class CreateTerrainMaterial(bpy.types.Operator):
     obj.data.materials.append(material)
     obj.active_material_index = len(obj.data.materials) - 1
 
+    for face in obj.data.polygons:
+        face.material_index = obj.active_material_index
+
   def execute(self, context):
     self.apply_mat(context.active_object)
     return{'FINISHED'}
