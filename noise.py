@@ -69,14 +69,16 @@ class tlab_terrain_noise_settings(bpy.types.Operator):
     def fade(self, t):return 6*t**5-15*t**4+10*t**3
     def lerp(self, a,b,t):return a+self.fade(t)*(b-a)
 
-    def octaved_ridge_noise(self, x, y, detail):
-        noiseVal = 0.0
+    def octaved_ridge_noise(self, x: np.array, y: np.array, detail):
+        lenX = len(x)
+        lenY = len(y)
+        noiseVal = np.array([[0.0] * lenX] * lenY)
         amplitude = 1.0
         freq = self.noiseScale
-        weight = 1
+        weight = np.array([[1.0] * lenX] * lenY)
 
         for o in range(0, self.octaves):
-            v = 1.0 - np.abs(simplex.noise2(x / freq / detail, y / freq / detail))
+            v = 1.0 - np.abs(simplex.noise2array(x / freq / detail, y / freq / detail))
             v *= v
             v *= weight
             weight = np.clip(v * self.weight, 0.0, 1.0)
@@ -87,13 +89,15 @@ class tlab_terrain_noise_settings(bpy.types.Operator):
 
         return noiseVal
 
-    def octaved_simplex_noise(self, x, y, detail):
-        noiseVal = 0.0
+    def octaved_simplex_noise(self, x: np.array, y: np.array, detail):
+        lenX = len(x)
+        lenY = len(y)
+        noiseVal = np.array([[0.0] * lenX] * lenY)
         amplitude = 1.0
         freq = self.noiseScale
 
         for o in range(0, self.octaves):
-            v = (simplex.noise2(x / freq / detail, y / freq / detail) + 1.0) / 2.0
+            v = (simplex.noise2array(x / freq / detail, y / freq / detail) + 1.0) / 2.0
             noiseVal += v * amplitude
             
             freq /= self.frequency
@@ -105,43 +109,42 @@ class tlab_terrain_noise_settings(bpy.types.Operator):
         x = (x / (detail+1.0)) * 2.0 - 1.0
         y = (y / (detail+1.0)) * 2.0 - 1.0
 
-        value = np.max([np.abs(x), np.abs(y)])
+        v = np.meshgrid(x, y)
+        x, y = v
+        x = x.reshape(detail, detail, 1)
+        y = y.reshape(detail, detail, 1)
+        t = np.fmax(x, y)
+        t = t.reshape(detail, detail)
 
-        a = self.falloffSteepness
-        b = self.falloffOffset
+        lenX = len(x)
+        lenY = len(y)
+        a = np.array([[self.falloffSteepness] * lenX] * lenY)
+        b = np.array([[self.falloffOffset] * lenX] * lenY)
         
-        return 1 - (math.pow(value, a) / (math.pow(value, a) + math.pow((b - b * value), a)))
+        return 1 - (np.power(t, a) / (np.power(t, a) + np.power((b - b * t), a)))
 
     def generate_ridge_noise(self, N):
-        # N * N array all value is 0.
         offsetX = self.offset[0]
         offsetY = self.offset[1]
-        h = np.zeros((N,N))
+        x = np.array(range(N))
+        y = np.array(range(N))
         if self.falloff :
-            for x in range(h.shape[0]):
-                for y in range(h.shape[1]):
-                    h[x, y] = (self.octaved_simplex_noise(x + offsetX, y + offsetY, N) + self.octaved_ridge_noise(x + offsetX, y + offsetY, N)) / 2.0 * self.falloff_map(x, y, N)
+            h = (self.octaved_simplex_noise(x + offsetX, y + offsetY, N) + self.octaved_ridge_noise(x + offsetX, y + offsetY, N)) / 2.0 * self.falloff_map(x, y, N)
         else:
-            for x in range(h.shape[0]):
-                for y in range(h.shape[1]):
-                    h[x, y] = (self.octaved_simplex_noise(x + offsetX, y + offsetY, N) + self.octaved_ridge_noise(x + offsetX, y + offsetY, N)) / 2.0
+            h = (self.octaved_simplex_noise(x + offsetX, y + offsetY, N) + self.octaved_ridge_noise(x + offsetX, y + offsetY, N)) / 2.0
 
         # return inverse lerp value multiplyed amplitude.
         return np.clip((h  - h.min()) / (h.max() - h.min()) * self.maxHeight, self.waterLevel, self.maxHeight)
     
     def generate_noise(self, N):
-        # N * N array all value is 0.
         offsetX = self.offset[0]
         offsetY = self.offset[1]
-        h = np.zeros((N,N))
+        x = np.array(range(N))
+        y = np.array(range(N))
         if self.falloff :
-            for x in range(h.shape[0]):
-                for y in range(h.shape[1]):
-                    h[x, y] = self.octaved_simplex_noise(x + offsetX, y + offsetY, N) * self.falloff_map(x, y, N)
+            h = self.octaved_simplex_noise(x + offsetX, y + offsetY, N) * self.falloff_map(x, y, N)
         else :
-            for x in range(h.shape[0]):
-                for y in range(h.shape[1]):
-                    h[x, y] = self.octaved_simplex_noise(x + offsetX, y + offsetY, N)
+            h = self.octaved_simplex_noise(x + offsetX, y + offsetY, N)
 
         # return inverse lerp value multiplyed amplitude.
         return np.clip((h  - h.min()) / (h.max() - h.min()) * self.maxHeight, self.waterLevel, self.maxHeight)
