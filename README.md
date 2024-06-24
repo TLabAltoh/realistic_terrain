@@ -11,21 +11,21 @@ Add-on for Blender that generates terrain height map and simulates hydraulic ero
 <table>
     <caption>Generate Terrain Height Map (Left: Perlin Noise, Right: Perlin Noise with Ridge)</caption>
     <tr>
-        <td><img src="Media/noise.png" width="530" /></td>
-        <td><img src="Media/ridge-noise.png" width="530" /></td>
+        <td><img src="media/noise.png" width="530" /></td>
+        <td><img src="media/ridge-noise.png" width="530" /></td>
     </tr>
 </table>
 <table>
     <caption>Erode Terrain Mesh (Left: Befor, Right: After)</caption>
     <tr>
-        <td><img src="Media/befor-erosion.png" width="530" /></td>
-        <td><img src="Media/after-erosion-and-smoothmesh.png" width="530" /></td>
+        <td><img src="media/befor-erosion.png" width="530" /></td>
+        <td><img src="media/after-erosion-and-smoothmesh.png" width="530" /></td>
     </tr>
 </table>
 <table>
     <caption>Terrain Material</caption>
     <tr>
-        <td><img src="Media/material.png" width="530" /></td>
+        <td><img src="media/material.png" width="530" /></td>
     </tr>
 </table>
 
@@ -60,7 +60,7 @@ C:\Users\{USER_NAME}\AppData\Roaming\Blender Foundation\Blender\3.4\scripts\addo
 - Enable "realistic terrain"  
 <img src="media/install-to-blender.1.png" width="256"></img>  
 - The toolbar will then appear here  
-<img src="Media/toolbar.png" width="256" /></img>  
+<img src="media/toolbar.png" width="256" /></img>  
 
 </details>
 
