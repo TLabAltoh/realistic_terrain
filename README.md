@@ -60,7 +60,7 @@ C:\Users\{USER_NAME}\AppData\Roaming\Blender Foundation\Blender\3.4\scripts\addo
 - Enable "realistic terrain"  
 <img src="media/install-to-blender.1.png" width="256"></img>  
 - The toolbar will then appear here  
-<img src="Media/toolbar.png" width="256" />
+<img src="Media/toolbar.png" width="256" /></img>  
 
 </details>
 
