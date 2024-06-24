@@ -1,9 +1,9 @@
 import bpy
 import logging
 
-from realistic_terrain import grid
+from realistic_terrain import mesh
 from realistic_terrain import erode
-from realistic_terrain import perlin
+from realistic_terrain import noise
 from realistic_terrain import material
 
 bl_info = {
@@ -20,48 +20,50 @@ bl_info = {
     "category": "Terrain"
 }
 
+TAG = "[realistic_terrain] "
+
 #
 # Terrain
 #
 
-class Terrain(bpy.types.Menu):
+class TLAB_TERRAIN_MT_terrain(bpy.types.Menu):
     bl_label = "Terrain"
     
     def draw(self, context):
-        self.layout.menu("Grid")
-        self.layout.menu("Erode")
-        self.layout.menu("Perlin")
+        self.layout.menu("TLAB_TERRAIN_MT_mesh")
+        self.layout.menu("TLAB_TERRAIN_MT_erode")
+        self.layout.menu("TLAB_TERRAIN_MT_noise")
 
 #
 # Main thread
 #
 
 menus = [
-    Terrain,
-    grid.Grid,
-    erode.Erode,
-    perlin.Perlin,
+    TLAB_TERRAIN_MT_terrain,
+    mesh.TLAB_TERRAIN_MT_mesh,
+    erode.TLAB_TERRAIN_MT_erode,
+    noise.TLAB_TERRAIN_MT_noise,
 ]
 
 classes = [
-    grid.GridSettings,
-    grid.CreateGrid,
-    grid.GridSmooth,
+    mesh.tlab_terrain_grid_settings,
+    mesh.tlab_terrain_smooth_terrain_mesh,
+    mesh.tlab_terrain_generate_terrain_mesh,
 
-    erode.ErodeSettings,
-    erode.ProcessErode,
+    erode.tlab_terrain_erode_settings,
+    erode.tlab_terrain_process_erode,
 
-    perlin.PerlinSettings,
-    perlin.CreatePerlinNoise,
+    noise.tlab_terrain_noise_settings,
+    noise.tlab_terrain_generate_noise,
     
-    material.TerrainMaterial,
-    material.TerrainMaterialPanel,
-    material.CreateTerrainMaterial
+    material.tlab_terrain_terrain_material_prop,
+    material.tlab_terrain_generate_terrain_material,
+    material.TLAB_TERRAIN_PT_terrain_material_panel,
 ]
 
 properties = {
     bpy.types.Material:{
-        "terrain_mat": bpy.props.PointerProperty(type = material.TerrainMaterial),
+        "terrain_mat": bpy.props.PointerProperty(type = material.tlab_terrain_terrain_material_prop),
         "terrain_mat_registed": bpy.props.BoolProperty(default = False)
     }
 }
@@ -71,7 +73,7 @@ def menu_fn(self, context):
     
     # Show UI
     if context.mode == 'OBJECT':
-        self.layout.menu("Terrain")
+        self.layout.menu("TLAB_TERRAIN_MT_terrain")
 
 
 def register():
@@ -104,7 +106,7 @@ def register():
             except:  # pylint: disable=bare-except
                 logging.warning(' * warning: register\t%s\t%s', typ, attr)
 
-    print("[realistic-terrain] addon enabled")
+    print(TAG, "addon enabled")
 
 
 def unregister():
@@ -124,7 +126,7 @@ def unregister():
             if hasattr(typ, attr):
                 delattr(typ, attr)
 
-    print("[realistic-terrain] addon disabled")
+    print(TAG, "addon disabled")
 
 
 if __name__ == "__main__":

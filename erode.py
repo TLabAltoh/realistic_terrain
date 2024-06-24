@@ -12,55 +12,11 @@ from realistic_terrain import dx11_erosion
 # Erode
 #
 
-class ErodeSettings(bpy.types.Operator):  
-    bl_idname = "talb_terrain.erode_settings"
+class tlab_terrain_erode_settings(bpy.types.Operator):  
+    bl_idname = "tlab_terrain.erode_settings"
     bl_label = "Erode Settings"
     bl_description = "Erode Settings"
     bl_options = {'REGISTER', 'UNDO'}
-
-    """
-    #
-    # definition of cpp side
-    #
-    
-    # default value
-    int m_mapSize = 255;
-    float m_size = 20;
-    float m_elevationm_size = 10;
-
-    int m_numErosionIterations = 50000;
-    int m_erosionBrushRadius = 3;
-
-    int m_maxLifetime = 30;
-    float m_inertia = 0.3f;
-    float m_sedimentCapacityFactor = 3.0f;
-    float m_minSedimentCapacity = .01f;
-    float m_depositSpeed = 0.3f;
-    float m_erodeSpeed = 0.3f;
-
-    float m_evaporateSpeed = .01f;
-    float m_gravity = 4;
-    float m_startSpeed = 1;
-    float m_startWater = 1;
-
-
-    # cpp erode()
-       float maxSize
-     , float size
-     , float elevationm_size
-     , int numErosionIterations
-     , int erosionBrushRadius
-     , int maxLifetime
-     , float inertia
-     , float sedimentCapacityFactor
-     , float minSedimentCapacity
-     , float depositSpeed
-     , float erodeSpeed
-     , float evaporateSpeed
-     , float gravity
-     , float startSpeed
-     , float startWater)
-    """
 
     # erode settings
     size : bpy.props.FloatProperty(name = "size: ", default = 20.0)
@@ -90,17 +46,17 @@ class ErodeSettings(bpy.types.Operator):
             bpy.ops.object.mode_set(mode='EDIT')
             
             # object name
-            print("name: ", obj.name)
-            print("object.data.name: ", obj.data.name)
+            #print("name: ", obj.name)
+            #print("object.data.name: ", obj.data.name)
             
             # vertices count
             vertices = obj.data.vertices
             vertices_count = len(vertices)
-            print("len(vertices): ", vertices_count)
+            #print("len(vertices): ", vertices_count)
             
             # vertices sqrt check
             sqrt = math.sqrt(vertices_count)
-            print("math.sqrt(vertices_count): ", sqrt)
+            #print("math.sqrt(vertices_count): ", sqrt)
             if (sqrt != int(sqrt)):
                 print("[error] the number of vertices is not n squared.")
                 bpy.ops.object.mode_set(mode='OBJECT')
@@ -108,7 +64,7 @@ class ErodeSettings(bpy.types.Operator):
             
             # get mesh data
             mesh_data = bmesh.from_edit_mesh(obj.data)
-            print("mesh_data: ", mesh_data)
+            #print("mesh_data: ", mesh_data)
             
             # np input buffer
             z = []
@@ -151,18 +107,18 @@ class ErodeSettings(bpy.types.Operator):
         return context.window_manager.invoke_props_dialog(self)
 
 
-class ProcessErode(bpy.types.Operator):
-    bl_idname = "talb_terrain.erode_process"
+class tlab_terrain_process_erode(bpy.types.Operator):
+    bl_idname = "tlab_terrain.process_erode"
     bl_label = "Erode Process"
     bl_description = "Process Erode Simulation"
     
     def execute(self, context):
-        bpy.ops.talb_terrain.erode_settings("INVOKE_DEFAULT")
+        bpy.ops.tlab_terrain.erode_settings("INVOKE_DEFAULT")
         return {"FINISHED"}
 
 
-class Erode(bpy.types.Menu):
+class TLAB_TERRAIN_MT_erode(bpy.types.Menu):
     bl_label = "Erode"
     
     def draw(self, context):
-        self.layout.operator("talb_terrain.erode_process", text="Process")
+        self.layout.operator("tlab_terrain.process_erode", text="Process")

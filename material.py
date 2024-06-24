@@ -57,7 +57,7 @@ def _updateNoiseScale(prop, context, labelKey, attrKey, inputKey):
     return
 
 
-class TerrainMaterial(bpy.types.PropertyGroup):
+class tlab_terrain_terrain_material_prop(bpy.types.PropertyGroup):
     """ Material
     """
     # ColorRamp
@@ -224,8 +224,8 @@ class TerrainMaterial(bpy.types.PropertyGroup):
     )
 
 
-class CreateTerrainMaterial(bpy.types.Operator):
-  bl_idname = "tlab_terrain.material_create"
+class tlab_terrain_generate_terrain_material(bpy.types.Operator):
+  bl_idname = "tlab_terrain.generate_terrain_material"
   bl_label = "create new"
   
   def apply_mat(self, obj):
@@ -466,8 +466,8 @@ class CreateTerrainMaterial(bpy.types.Operator):
     return{'FINISHED'}
 
 
-class TerrainMaterialPanel(bpy.types.Panel):
-    bl_idname = "tlab_terrain.material_prop"
+class TLAB_TERRAIN_PT_terrain_material_panel(bpy.types.Panel):
+    bl_idname = "tlab_terrain_PT_terrain_material_panel"
     bl_label = "Terrain Material"
     bl_space_type = "PROPERTIES"
     bl_region_type = "WINDOW"
@@ -489,7 +489,7 @@ class TerrainMaterialPanel(bpy.types.Panel):
             col = layout.column()
             col.label(text="Terrain material not selected")
             col = layout.column()
-            col.operator("tlab_terrain.material_create", text = "Create New")
+            col.operator("tlab_terrain.generate_terrain_material", text = "Create New")
         else:
             col = layout.column()
             col.label(text="ColorRamp")
