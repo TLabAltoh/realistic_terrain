@@ -1,5 +1,5 @@
 # Realistic Terrain
-Add-on for Blender that generates terrain height map and simulates hydraulic erosion using DirectX11 compute shaders.
+Add-on for Blender that generates terrain height map and simulates hydraulic erosion using DirectX11 compute shaders. DX11 dll used in this plugin is [here](https://github.com/TLabAltoh/realistic_terrain_dx11_plugin)
 
 ## Screenshot
 [youtube](https://www.youtube.com/watch?v=v3CK-s1jXPg)
